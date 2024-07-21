@@ -1,29 +1,35 @@
 import Header from "./Header";
 import netflix from "../images/netflix.jpg";
 import { useRef, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+
 
 let Login = () => {
   let [toggleButton, setToggleButton] = useState(true);
 
   let [error, setError] = useState(null);
 
-  let nevigate = useNavigate()
+
 
   let email = useRef(null);
   let password = useRef(null);
+  let name = useRef(null)
 
-  let userValidation = (email, password) => {
+  let userValidation = (email, password,name ) => {
     let setEmail = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(
       email
     );
     let setPassword =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password);
+    
+      
 
     if (!setEmail) return "Email ID is not valid";
     if (!setPassword) return "Password is not valid";
+   
+
+
     else return null;
   };
 
@@ -49,7 +55,7 @@ let Login = () => {
           {!toggleButton && (
             <div className="m-4 w-full">
               {" "}
-              <input
+              <input ref={name}
                 className="h-8 opacity-75 text-white rounded-md  placeholder:text-white  bg-slate-500 w-full p-6"
                 type="text"
                 placeholder="Enter Name"
@@ -95,12 +101,22 @@ let Login = () => {
               className="text-white rounded-md w-full font-semibold bg-red-700  opacity-75 p-2"
               onClick={() => {
                 let error1 = userValidation(
+
                   email.current.value,
-                  password.current.value
+                  
+                  password.current.value,
+
+                
+
+                 
                 );
+              
+             
+              
                 
                 setError(error1)
                 
+                // displayName
 
          
 
@@ -116,6 +132,19 @@ let Login = () => {
                     .then((userCredential) => {
                       // Signed up
                       const user = userCredential.user;
+
+                    
+                      updateProfile(user, {
+                        displayName:name.current.value 
+                      }).then(() => {
+                        // Profile updated!
+                        // ...
+                      }).catch((error) => {
+                        // An error occurred
+                        // ...
+                      });
+
+
                     })
 
                     .catch((error) => {
@@ -131,9 +160,22 @@ let Login = () => {
                   signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                     .then((userCredential) => {
                       // Signed in 
+
+
                       const user = userCredential.user;
-                      console.log(user)
-                      nevigate('/browser')
+                       
+                    
+                      updateProfile(user, {
+                        displayName: user.displayName
+                      }).then(() => {
+                        // Profile updated!
+                        // ...
+                      }).catch((error) => {
+                        // An error occurred
+                        // ...
+                      });
+                    
+                     
                       // ...
                     })
                     .catch((error) => {
@@ -141,7 +183,8 @@ let Login = () => {
                       const errorMessage = error.message;
 
                       setError(errorCode + " " + errorMessage)
-                      console.log(errorCode,errorMessage)
+                     
+                     
                      
                     });
                   
