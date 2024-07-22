@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react"
 import { API_OPTION } from "../utils/constance"
+import { useDispatch } from "react-redux"
+
+import { addKeys } from "../utils/moviesSlice"
 
 let useMovieTrailer = (id)=>{
+
+    let dispatch = useDispatch()
 
     let [data,setData] = useState(null)
 
@@ -16,6 +21,12 @@ let useMovieTrailer = (id)=>{
 
        let trailer = filterdata[0];
 
+    
+
+       dispatch(addKeys(trailer))
+
+
+
        
        setData(trailer)
     }
@@ -27,7 +38,7 @@ let useMovieTrailer = (id)=>{
      
     },[])
 
-
+ 
    return data    
 }
 

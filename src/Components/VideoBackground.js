@@ -1,25 +1,30 @@
+import useMovieTrailer from "../hooks/useMovieTrailer";
 
-import useMovieTrailer from '../hooks/useMovieTrailer'
+import { useSelector } from "react-redux";
 
-let VideoBackground = ({teaserid})=>{
-   
-    const{id} = teaserid
+let VideoBackground = ({ teaserid }) => {
+  const { id } = teaserid;
 
-    let movieTrailer = useMovieTrailer(id)
+  let movieTrailer = useMovieTrailer(id);
 
-    if(movieTrailer === null) return
+  let key = useSelector((store) => store?.movies?.setKey);
 
-    console.log(movieTrailer.key);
- 
+  if (movieTrailer === null) return;
 
-    return (
-     <>
-     
-        <h1>{}</h1>
+  return (
+    <div>
+      <div className="  ">
+        <iframe
+        className="w-full aspect-video  "
+          src={"https://www.youtube.com/embed/" + key.key + "?&autoplay=1&mute=1"}
+          si="6NeVbU_77YbKjvvx"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+    </div>
+  );
+};
 
-        <div><iframe width="560" height="315" src="https://www.youtube.com/embed/L4DrolmDxmw?si=6NeVbU_77YbKjvvx" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" ></iframe></div>
-     </>
-    )
-}
-
-export default VideoBackground
+export default VideoBackground;

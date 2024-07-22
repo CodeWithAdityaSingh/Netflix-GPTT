@@ -4,19 +4,21 @@ import { auth } from "../utils/firebase";
 import usePlayingNow from "../hooks/useNowPlaying";
 import MainContainer from "./MainContainer";
 import SecondaryContiner from "./SecondaryContainer";
+import usePopular from "../hooks/usePopular";
 
 let Browse = () => {
  
 
  usePlayingNow()
+ usePopular()
 
 
   return (
-  <div>
-      <div className="w-full flex justify-between h-50 items-center p-4 bg-opacity-10 shadow-sm shadow-black   bg-black h-1/4 ">
+  <div className="">
+      <div className="w-full flex justify-between   items-center p-4 absolute  z-50   ">
       <Header />
-      <button
-        className=" rounded-md  bg-black text-white  p-2"
+      <button 
+        className=" rounded-md  text-white  p-2"
         onClick={() => {
           signOut(auth)
             .then(() => {})
@@ -35,10 +37,13 @@ let Browse = () => {
 
 
       
-       </div>
+       </div >
        <MainContainer/>
+     
 
-       {/* <SecondaryContiner/> */}
+       <SecondaryContiner/>
+
+    
        
   </div>
   );
