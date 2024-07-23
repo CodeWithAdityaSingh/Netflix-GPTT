@@ -5,7 +5,7 @@ let TitleCard = ({ titleCard }) => {
 
   return (
     <div>
-      <div className="m-2 rounded-lg  w-40   ">
+      <div className="m-2 rounded-lg  w-40  cursor-pointer  ">
         <img
           className=""
           alt="cardPoster"

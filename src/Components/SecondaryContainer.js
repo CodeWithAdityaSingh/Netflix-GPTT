@@ -8,7 +8,7 @@ let SecondaryContiner = () => {
 
   let popularMovieSelector = useSelector((store)=>store.movies.popularMovies)
 
-  console.log(popularMovieSelector);
+ 
   
   usePopular()
 
@@ -21,8 +21,8 @@ let SecondaryContiner = () => {
   return (
 
 
-
-    <div className= "bg-black z-40 -mt-80">
+    
+    <div className= "bg-black z-40 -mt-80 w-full">
 
     <div className=" text-white   bg-opacity-10 relative ">
       <Title title={"Now Playing"} movieCard = {movieCard} />
