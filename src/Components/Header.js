@@ -22,7 +22,7 @@ let Header = () => {
       } else {
         dispatch(removeUser());
 
-        navigate("/");
+         navigate("/");
       }
     });
   }, []);

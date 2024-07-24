@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userreducer from './userslice'
 import moviereducer from "./moviesSlice"
 import gptreducers from "./gptSlice"
+import langaudereducers from './languageSlice'
 
 
 let appstore = configureStore({
@@ -9,7 +10,8 @@ let appstore = configureStore({
 
           user : userreducer,
           movies : moviereducer,
-          Gpt :   gptreducers
+          Gpt :   gptreducers,
+          changeLanguagee : langaudereducers
           
     }
 })
