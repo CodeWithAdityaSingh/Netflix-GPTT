@@ -15,8 +15,6 @@ import { useRef } from "react";
 
 
 
-
-
 let Browse = () => {
   usePlayingNow();
   usePopular();

@@ -1,3 +1,5 @@
+
+
 import TitleCard from "./TitleCards";
 
 let Title = ({ movieCard, title }) => {
